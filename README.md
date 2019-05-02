@@ -1,7 +1,5 @@
-# BASH-based data post-processing
+# BASH-based data post-processing (BDP)
 
-## files: the file names of data that you are going to process
-## strings: the element names of data that you are going to extract from each data file
+* files: the file names of data that you are going to process
+* strings: the *CAS No.* of elements of data that you want to extract from each data file
 
-Note: spaces are not allowed in the "strings", e.g., "name space". 
-If spaces are inevitable, please use the style of "name\sspace".
