@@ -18,20 +18,15 @@ echo " "
 
 if [ ! -z "$1" ];
 then
-    if [ "$1" == "--help" ] || [ "$1" == "-h" ]
-    then
-        echo "    Execute 'bash post-processing -h' for more help information"
-        echo "    Execute 'bash post-processing -s' to sort strings w.r.t. CAS #"
-        echo " "
-        exit 0
-    fi
-    if [ $1 = '-s' ];
+    if [ $1 = 'sort' ];
     then
         sort -n strings | tee strings_sorted | mv strings_sorted strings
     fi
+    if [ "$1" == "--help" ] || [ "$1" == "-h" ]
+    then
+        echo "bash post-processing sort or bash post-processing"
+    fi
 fi
-
-
 
 for STRING in `cat strings`
 do
@@ -41,7 +36,6 @@ do
     done
     paste `cat files` > $STRING
     rm `cat files`
-    echo -n "."
 done
 
 cat `cat strings` > tmp
@@ -51,19 +45,15 @@ rm tmp temp `cat strings`
 
 for STRING in `cat strings`
 do
-    for VARIABLE in `cat files`
-    do
-        egrep -i $STRING $VARIABLE.csv | awk '{print $4}' | sort -n | tail -1 > $VARIABLE
-    done
-    paste `cat files` > $STRING
-    rm `cat files`
-    echo -n "."
+   for VARIABLE in `cat files`
+   do
+       egrep -i $STRING $VARIABLE.csv | awk '{print $4}' | sort -n | tail -1 > $VARIABLE
+   done
+   paste `cat files` > $STRING
+   rm `cat files`
 done
 
-echo ""
 cat `cat strings` > tmp
 paste strings tmp > temp
 cat files temp > BDP_Relative.out
 rm tmp temp `cat strings`
-
-echo "DONE"
