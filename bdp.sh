@@ -1,8 +1,7 @@
 #!/bin/bash
-# Maintained by Qiao-Le He
 
 echo " "
-echo "                :-) BASH based data post-processing (BDP) (-:"
+echo "                :-) BASH-based data post-processing (BDP) (-:"
 echo " "
 echo "                       BDP is written by Qiao-Le He"
 echo " "
@@ -20,12 +19,12 @@ if [ ! -z "$1" ];
 then
     if [ "$1" == "--help" ] || [ "$1" == "-h" ]
     then
-        echo "    Execute 'bash post-processing -h' for more help information"
-        echo "    Execute 'bash post-processing -s' to sort strings w.r.t. CAS #"
+        echo "    Execute 'bash bdp.sh -h' for more help information"
+        echo "    Execute 'bash bdp.sh -s' to sort strings w.r.t. CAS #"
         echo " "
         exit 0
     fi
-    if [ $1 = '-s' ];
+    if [ $1 = '--sort' ] || [ $1 = '-s' ];
     then
         sort -n strings | tee strings_sorted | mv strings_sorted strings
     fi
