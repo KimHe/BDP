@@ -3,7 +3,7 @@
 * files: the file names of data that you are going to process
 * strings: the *CAS No.* or *names* of elements of data that you want to extract from each data file
 
-##GUIDLINE:
+## GUIDLINE:
 
 * For the csv datasets:
 
