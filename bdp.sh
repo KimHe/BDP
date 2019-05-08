@@ -125,5 +125,16 @@ paste .strings tmp > temp
 cat files temp > BDP_Relative.out
 rm tmp temp `cat .strings`
 
-echo "[INFO]: DONE"
 
+if [ "$check" == 1 ];
+then
+    sed -i 's/\\\[/\[/g' BDP_Area.out
+    sed -i 's/\\\]/\]/g' BDP_Area.out
+    sed -i 's/\\\[/\[/g' BDP_Relative.out
+    sed -i 's/\\\]/\]/g' BDP_Relative.out
+    sed -i 's/\\s/ /g'   BDP_Area.out
+    sed -i 's/\\s/ /g'   BDP_Relative.out
+    echo ""
+fi
+
+echo "[INFO]: DONE"
