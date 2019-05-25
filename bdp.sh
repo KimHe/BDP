@@ -19,6 +19,7 @@ while [[ "$#" -gt 0 ]];
 do
     case $1 in
         -h|--help) help=1; shift;;
+        -t|--trans) trans=1;;
         -s|--sort) sort=1;;
         -g|--generate) generate=1;;
         -c|--check) check=1;;
@@ -29,11 +30,15 @@ done
 if [ "$help" == 1 ];
 then
     echo "[SYNOPSIS]:"
-    echo -e "\t bash bdp.sh -h -g -s -c"
+    echo -e "\t bash bdp.sh -h"
+    echo -e "\t bash bdp.sh -t"
+    echo -e "\t bash bdp.sh -g -c -s"
     echo ""
     echo "[OPTIONS]:"
     echo -e "\t -h, --help"
     echo -e "\t \t Display help information and exit"
+    echo -e "\t -t, --trans"
+    echo -e "\t \t Transfer the csv docs from xlsx docs and exit"
     echo -e "\t -g, --generate"
     echo -e "\t \t Generate the STRING file from the raw data"
     echo -e "\t -s, --sort"
@@ -41,6 +46,17 @@ then
     echo -e "\t -c, --check"
     echo -e "\t \t Check whether the STRINGS pattern is qualified for this program. Square brackets [] will be replaced with \[\]. Trailing spaces will be omitted. Spaces between names will be replaced with \s."
     echo " "
+    exit 0
+fi
+
+if [ "$trans" == 1 ];
+then
+    for TRANS in `cat files`
+    do
+        ssconvert $TRANS.xlsx $TRANS.csv
+    done
+    echo "[INFO]: The CSV docs have been converted from the XLSX docs"
+    echo ""
     exit 0
 fi
 

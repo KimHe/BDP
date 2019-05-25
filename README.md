@@ -3,7 +3,7 @@
 * files: the file names of data that you are going to process
 * strings: the *CAS No.* or *names* of elements of data that you want to extract from each data file
 
-## GUIDLINE:
+## GUIDELINE:
 
 * For the csv datasets:
 
@@ -19,3 +19,15 @@
 2. The initial dots (.) in the element names were deleted;
 3. All asterisks were replaced with dots (.);
 4. All primes in the element names might be dangerous for the program
+
+## Dependences
+    lower versions might also work, but no guarantee
+
+* >=ssconvert-1.12.39 (gnumeric spreadsheet program)
+* >=grep-3.1
+* >=sed-8.30
+* >=sort-8.30
+* >=paste-8.30
+* >=cat-8.30
+
+
