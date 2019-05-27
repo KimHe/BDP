@@ -38,7 +38,7 @@ then
     echo -e "\t -h, --help"
     echo -e "\t \t Display help information and exit"
     echo -e "\t -t, --trans"
-    echo -e "\t \t Transfer the csv docs from xlsx docs and exit"
+    echo -e "\t \t Convert the plain txt files from xlsx docs and exit"
     echo -e "\t -g, --generate"
     echo -e "\t \t Generate the STRING file from the raw data"
     echo -e "\t -s, --sort"
@@ -53,7 +53,7 @@ if [ "$trans" == 1 ];
 then
     for TRANS in `cat files`
     do
-        ssconvert $TRANS.xlsx $TRANS.csv
+        ssconvert -O 'separator"    " format=raw' $TRANS.xlsx $TRANS.txt
     done
     echo "[INFO]: The CSV docs have been converted from the XLSX docs"
     echo ""
@@ -65,7 +65,7 @@ if [ "$generate" == 1 ];
 then
     for VARIABLE in `cat files`
     do
-        cat $VARIABLE.csv | awk '{print $7, $8, $9, $10, $11, $12, $13}' | sort -n > $VARIABLE
+        cat $VARIABLE.txt | awk '{print $7, $8, $9, $10, $11, $12, $13}' | sort -n > $VARIABLE
     done
     cat `cat files` > strings
     rm `cat files`
@@ -104,12 +104,31 @@ then
 fi
 
 
+# Extract Retention information
+for STRING in `cat .strings`
+do
+    for VARIABLE in `cat files`
+    do
+        grep -i -w $STRING $VARIABLE.txt | awk '{print $2}' | sort -n | tail -1 > $VARIABLE
+    done
+    paste `cat files` > $STRING
+    rm `cat files`
+    echo -n "."
+done
+echo ""
+
+cat `cat .strings` > tmp
+paste .strings tmp > temp
+cat files temp > BDP_Retention.out
+rm tmp temp `cat .strings`
+
+
 # Extract Area information
 for STRING in `cat .strings`
 do
     for VARIABLE in `cat files`
     do
-        grep -i -w $STRING $VARIABLE.csv | awk '{print $3}' | sort -n | tail -1 > $VARIABLE
+        grep -i -w $STRING $VARIABLE.txt | awk '{print $3}' | sort -n | tail -1 > $VARIABLE
     done
     paste `cat files` > $STRING
     rm `cat files`
@@ -128,7 +147,7 @@ for STRING in `cat .strings`
 do
     for VARIABLE in `cat files`
     do
-        grep -i -w $STRING $VARIABLE.csv | awk '{print $4}' | sort -n | tail -1 > $VARIABLE
+        grep -i -w $STRING $VARIABLE.txt | awk '{print $4}' | sort -n | tail -1 > $VARIABLE
     done
     paste `cat files` > $STRING
     rm `cat files`
@@ -148,8 +167,11 @@ then
     sed -i 's/\\\]/\]/g' BDP_Area.out
     sed -i 's/\\\[/\[/g' BDP_Relative.out
     sed -i 's/\\\]/\]/g' BDP_Relative.out
+    sed -i 's/\\\[/\[/g' BDP_Retention.out
+    sed -i 's/\\\]/\]/g' BDP_Retention.out
     sed -i 's/\\s/ /g'   BDP_Area.out
     sed -i 's/\\s/ /g'   BDP_Relative.out
+    sed -i 's/\\s/ /g'   BDP_Retention.out
     echo ""
 fi
 

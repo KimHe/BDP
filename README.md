@@ -5,9 +5,9 @@
 
 ## GUIDELINE:
 
-* For the csv datasets:
+* For the txt datasets:
 
-0. In all csv files, PLEASE delete the HEAD rows 
+0. In all txt files, PLEASE delete the HEAD rows 
     (these would be redundant information for the program);
 1. PLEASE put the element names at the END column
     (because element names have varying lengths);
@@ -23,7 +23,7 @@
 ## Dependences
     lower versions might also work, but no guarantee
 
-* >=ssconvert-1.12.39 (gnumeric spreadsheet program)
+* >=ssconvert-1.12.39 (gnumeric)
 * >=grep-3.1
 * >=sed-8.30
 * >=sort-8.30
