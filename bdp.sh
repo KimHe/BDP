@@ -30,9 +30,9 @@ done
 if [ "$help" == 1 ];
 then
     echo "[SYNOPSIS]:"
-    echo -e "\t bash bdp.sh -h"
-    echo -e "\t bash bdp.sh -t"
-    echo -e "\t bash bdp.sh -g -c -s"
+    echo -e "\t bdp -h"
+    echo -e "\t bdp -t"
+    echo -e "\t bdp -g -c -s"
     echo ""
     echo "[OPTIONS]:"
     echo -e "\t -h, --help"

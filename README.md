@@ -5,9 +5,9 @@
 
 ## GUIDELINE:
 
-* For the txt datasets:
+* For the TXT datasets:
 
-0. In all txt files, PLEASE delete the HEAD rows 
+0. In all TXT files, PLEASE delete the HEAD rows 
     (these would be redundant information for the program);
 1. PLEASE put the element names at the END column
     (because element names have varying lengths);
@@ -30,4 +30,7 @@
 * >=paste-8.30
 * >=cat-8.30
 
+## Compile
 
+* make 
+* make install
