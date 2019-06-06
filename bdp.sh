@@ -38,7 +38,7 @@ then
     echo -e "\t -h, --help"
     echo -e "\t \t Display help information and exit"
     echo -e "\t -t, --trans"
-    echo -e "\t \t Convert the plain txt files from xlsx docs and exit"
+    echo -e "\t \t Convert the plain txt files from xls docs and exit"
     echo -e "\t -g, --generate"
     echo -e "\t \t Generate the STRING file from the raw data"
     echo -e "\t -s, --sort"
@@ -53,9 +53,9 @@ if [ "$trans" == 1 ];
 then
     for TRANS in `cat files`
     do
-        ssconvert -O 'separator"    " format=raw' $TRANS.xlsx $TRANS.txt
+        ssconvert -O 'separator="    " format=raw' $TRANS.xls $TRANS.txt
     done
-    echo "[INFO]: The CSV docs have been converted from the XLSX docs"
+    echo "[INFO]: The TXT docs have been converted from the XLS docs"
     echo ""
     exit 0
 fi
